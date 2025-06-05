@@ -1,0 +1,20 @@
+
+Hello,
+Thank you for contacting the CHERRY Service Team. Your request number is: Che20250411-122179.
+You have sent us the following message:
+___
+Hello,
+My name is Florian and I work as an Engineering Manager in the Commonwealth Bank of Australia.
+Our Apple users are all experiencing issues with it where keystrokes are ignored, or keystroke are repeated.
+Affected Product:  Cherry KC 1000SC      M/N JK-A01      JK-A0103EU-2/04
+This page mentions MacOS should be compatible: https://aus01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.cherry.de%2Fen-gb%2Fproduct%2Fkc-1000-sc&data=05%7C02%7Cflorian.bidabe%40cba.com.au%7C3f5f152160f248e765ab08dd788b8b00%7Cdddffba06c174f3497483fa5e08cc366%7C0%7C0%7C638799262953286015%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=16MSgI7HCNt7NbQsJYETtg1DeKUAISLwjTrUT4mKui4%3D&reserved=0
+
+Is there a firmware update, quick fix/patch or workaround to resolve this issue please, or can I provide you with logs to investigate?
+Resolving this would be a big win, as our company is intending to increase the MacOS fleet and the keyboard issue is the biggest pain point so far...
+
+MacOS clients: ~1000+ people and MacOS laptops
+MacOS version is running on the clients: Sonoma. 14.7 (23H124)
+Type of Apple hardware-client is being used? MacBook Air M2 2022
+
+Many thanks
+regards, Florian

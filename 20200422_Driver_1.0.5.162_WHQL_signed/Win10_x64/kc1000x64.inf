@@ -1,0 +1,174 @@
+; kc1000x64.inf
+; Copyright (c) 2012 HID Global Corporation
+
+[Version]
+Signature=$Windows NT$
+Class=SmartCardReader
+ClassGuid={50DD5230-BA8A-11D1-BF5D-0000F805F530}
+Provider=%Provider%
+DriverVer=03/27/2020,1.0.5.162
+CatalogFile=kc1000x64.cat
+
+[SourceDisksNames]
+1=%DiskDescription%,,
+
+[SourceDisksFiles]
+kc1000x64.sys=1,,
+
+[DestinationDirs]
+DefaultDestDir = 10,system32\drivers
+kc1000x64.Install.NT.CopyFiles=10,system32\drivers
+
+[Manufacturer]
+%Cherry%=Cherry,NTamd64
+%Fujitsu%=Fujitsu,NTamd64
+
+; =================== Class section =======================
+
+[ClassInstall]
+Addreg=SmartCardReaderClassReg
+
+[SmartCardReaderClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-25
+HKR,,NoInstallClass,,1
+HKR,,Installer32,,"winscard.dll,ClassInstall32"
+
+
+; ===================== PnP IDs ===========================
+[ControlFlags]
+; All PnP devices should be excluded from manual AddDevice Applet list
+ExcludeFromSelect=*
+
+[Cherry.NTamd64]
+%cherry1% =  CHERRY1.Install, USB\VID_046A&PID_00A1&MI_02
+%cherry2% =  CHERRY2.Install, USB\VID_046A&PID_00A4&MI_02
+
+[Fujitsu.NTamd64]
+%fujitsu1% =  FUJITSU1.Install, USB\VID_0BF8&PID_1022&MI_02
+%fujitsu2% =  FUJITSU2.Install, USB\VID_0BF8&PID_1023&MI_02
+
+; ================== NT specific =====================
+
+[CHERRY1.Install.NT]
+AddReg    = kc1000x64.Install.NT.AddReg
+CopyFiles = kc1000x64.Install.NT.CopyFiles
+
+[CHERRY1.Install.NT.HW]
+AddReg    = CHERRY1.Install.AddReg.HW
+
+[CHERRY1.Install.NT.Services]
+AddService = kc1000x64, 2, CHERRY.Service.NT,kc1000x64.EventLog.NT
+
+[CHERRY2.Install.NT]
+AddReg    = kc1000x64.Install.NT.AddReg
+CopyFiles = kc1000x64.Install.NT.CopyFiles
+
+[CHERRY2.Install.NT.HW]
+AddReg    = CHERRY2.Install.AddReg.HW
+
+[CHERRY2.Install.NT.Services]
+AddService = kc1000x64, 2, CHERRY.Service.NT,kc1000x64.EventLog.NT
+
+
+[FUJITSU1.Install.NT]
+AddReg    = kc1000x64.Install.NT.AddReg
+CopyFiles = kc1000x64.Install.NT.CopyFiles
+
+[FUJITSU1.Install.NT.HW]
+AddReg    = FUJITSU1.Install.AddReg.HW
+
+[FUJITSU1.Install.NT.Services]
+AddService = kc1000x64, 2, FUJITSU.Service.NT,kc1000x64.EventLog.NT
+
+
+[FUJITSU2.Install.NT]
+AddReg    = kc1000x64.Install.NT.AddReg
+CopyFiles = kc1000x64.Install.NT.CopyFiles
+
+[FUJITSU2.Install.NT.HW]
+AddReg    = FUJITSU2.Install.AddReg.HW
+
+[FUJITSU2.Install.NT.Services]
+AddService = kc1000x64, 2, FUJITSU.Service.NT,kc1000x64.EventLog.NT
+
+
+[kc1000x64.Install.NT.AddReg]
+HKR,, AdapterType, 0, "0100"
+HKLM,"SYSTEM\CurrentControlSet\Services\SCardSvr",Start,0x00010001,2
+HKLM,"System\CurrentControlSet\Services\CertPropSvc",Start,0x00010001,2
+HKLM, Software\Microsoft\Cryptography\Calais\Readers,,,
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,DLLName,0,wlnotify.dll
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Logon,0,SCardStartCertProp
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Logoff,0,SCardStopCertProp
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Lock,0,SCardSuspendCertProp
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Unlock,0,SCardResumeCertProp
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Enabled,0x00010001,1
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Impersonate,0x00010001,1
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Asynchronous,0x00010001,1
+
+[kc1000x64.Install.NT.CopyFiles]
+kc1000x64.sys,,,2
+
+[CHERRY.Service.NT]
+DisplayName     = %CherryServiceName%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_AUTO_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\kc1000x64.sys
+
+
+[FUJITSU.Service.NT]
+DisplayName     = %FujitsuServiceName%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_AUTO_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\kc1000x64.sys
+
+
+[kc1000x64.EventLog.NT]
+AddReg = kc1000x64.AddEventLog.reg
+
+[kc1000x64.AddEventLog.reg]
+HKR,, EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\drivers\kc1000x64.sys"
+HKR,, TypesSupported,   0x00010001, 7
+
+; =======================================
+; === Cherry Keyboard KC 1000 
+; =======================================
+[CHERRY1.Install.AddReg.HW]
+HKR,,"VendorName",,"Cherry GmbH"
+HKR,,"IfdType",, "CHERRY KC 1000 SC"
+HKR,,"VidPid",, USB\VID_046A&PID_00A1&MI_02
+
+[CHERRY2.Install.AddReg.HW]
+HKR,,"VendorName",,"Cherry GmbH"
+HKR,,"IfdType",, "CHERRY KC 1000 SC Z"
+HKR,,"VidPid",, USB\VID_046A&PID_00A4&MI_02
+
+; =======================================
+; === Fujitsu Keyboard KB100 SCR
+; =======================================
+[FUJITSU1.Install.AddReg.HW]
+HKR,,"VendorName",,"Fujitsu"
+HKR,,"IfdType",, "Keyboard KB100 SCR"
+HKR,,"VidPid",, USB\VID_0BF8&PID_1022&MI_02
+
+[FUJITSU2.Install.AddReg.HW]
+HKR,,"VendorName",,"Fujitsu"
+HKR,,"IfdType",, "Keyboard KB100 SCR eSIG"
+HKR,,"VidPid",, USB\VID_0BF8&PID_1023&MI_02
+
+
+[Strings]
+Provider = "HID Global"
+CherryServiceName = "CHERRY Keyboard Smartcard Reader"
+FujitsuServiceName = "Fujitsu Keyboard Smartcard Reader"
+Cherry = "Cherry GmbH"
+Fujitsu = "Fujitsu"
+DiskDescription = "Keyboard Smartcard Reader Driver"
+cherry1 = "CHERRY KC 1000 SC"
+cherry2 = "CHERRY KC 1000 SC Z"
+fujitsu1 = "Keyboard KB100 SCR"
+fujitsu2 = "Keyboard KB100 SCR eSIG"
+ClassName = "Smart Card Readers"

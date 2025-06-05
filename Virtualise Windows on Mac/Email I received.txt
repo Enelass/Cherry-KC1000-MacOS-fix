@@ -1,0 +1,28 @@
+                                                 
+Dear Florian,
+
+Thank you for your enquiry and sorry for the late reply on this. 
+
+Fortunately I have good news.
+
+There is a firmware update available that should fix the problem. 
+You can download the update FW v.1.2.1.4  and the installer using this direct link:
+https://cherry-prod.my.salesforce.com/sfc/p/0Y000000rpt6/a/Of000004Ug9B/BkRCnKPNEeqtJZ0tQBN7bxsdiN6MueSV62MZ9FSsdxc
+
+The installer requires Windows 10 or 11 running the latest driver v1.0.5.162:
+https://cherry-prod.my.salesforce.com/sfc/p/0Y000000rpt6/a/Of000000Po9h/xq0maSzwwkvmp20EI8V8vUlnhxu8KJXhtsSUS5uPQOc
+
+In order to update please follow the instructions given in the readme file included into the zip package.
+
+For further questions, please just reply to this email without changing the subject line.
+
+When contacting us, please have your service request number Che20250411-122179 ready.
+
+Kind regards,
+
+Andreas Lindner
+Your CHERRY Customer Service Team
+Cherry SE
+Operational Site:
+Cherry Europe GmbH - Cherrystr. 2, 91275 Auerbach i. d. OPf., - Deutschland
+Telefon/Phone +49 9643 2061-100

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry KC 1000 SC Firmware Update Tool for macOS</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #c62828;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header img {
+            max-height: 80px;
+        }
+        h1, h2, h3 {
+            color: #c62828;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .highlight {
+            background-color: #f8f9fa;
+            border-left: 4px solid #c62828;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #c62828;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .praise {
+            font-size: 1.1em;
+            font-style: italic;
+            background-color: #f0f7ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #0066cc;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Cherry KC 1000 SC Firmware Update Tool</h1>
+            <p>An innovative macOS solution using Wine</p>
+        </div>
+        <img src="https://via.placeholder.com/150x80?text=Cherry+KC+1000" alt="Cherry KC 1000 SC Keyboard">
+    </header>
+
+    <div class="container">
+        <h2>The Wine Approach</h2>
+        <p>When faced with the challenge of updating Cherry KC 1000 SC keyboard firmware on macOS, virtual machines are a resource-heavy solution requiring Windows licenses and significant disk space. The Wine approach offers a lightweight alternative that:</p>
+        
+        <ul>
+            <li>Automatically installs all dependencies</li>
+            <li>Configures Wine specifically for USB device access</li>
+            <li>Provides robust error handling and user guidance</li>
+            <li>Delivers a seamless experience for technical and non-technical users alike</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>Script Architecture</h2>
+        <div class="diagram">
+            <h3>Workflow Diagram</h3>
+            <svg width="800" height="500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+                <!-- Script Workflow Diagram -->
+                <style>
+                    .box { fill: #fff; stroke: #c62828; stroke-width: 2; }
+                    .decision { fill: #fff; stroke: #c62828; stroke-width: 2; }
+                    .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+                    .text { font-family: Arial; font-size: 12px; fill: #333; text-anchor: middle; }
+                    .small-text { font-family: Arial; font-size: 10px; fill: #666; text-anchor: middle; }
+                </style>
+                
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+                    </marker>
+                </defs>
+                
+                <!-- Start -->
+                <rect x="350" y="20" width="100" height="40" rx="5" class="box" />
+                <text x="400" y="45" class="text">Start Script</text>
+                
+                <!-- Check Homebrew -->
+                <polygon points="350,90 450,90 400,130" class="decision" />
+                <text x="400" y="115" class="text">Homebrew?</text>
+                
+                <!-- Install Homebrew -->
+                <rect x="200" y="150" width="120" height="40" rx="5" class="box" />
+                <text x="260" y="175" class="text">Install Homebrew</text>
+                
+                <!-- Check XQuartz -->
+                <polygon points="350,170 450,170 400,210" class="decision" />
+                <text x="400" y="195" class="text">XQuartz?</text>
+                
+                <!-- Install XQuartz -->
+                <rect x="500" y="150" width="120" height="40" rx="5" class="box" />
+                <text x="560" y="175" class="text">Install XQuartz</text>
+                
+                <!-- Check Wine -->
+                <polygon points="350,250 450,250 400,290" class="decision" />
+                <text x="400" y="275" class="text">Wine?</text>
+                
+                <!-- Install Wine -->
+                <rect x="200" y="310" width="120" height="40" rx="5" class="box" />
+                <text x="260" y="335" class="text">Install Wine</text>
+                
+                <!-- Configure Wine -->
+                <rect x="350" y="310" width="120" height="40" rx="5" class="box" />
+                <text x="410" y="335" class="text">Configure Wine</text>
+                
+                <!-- Run Firmware Update -->
+                <rect x="350" y="380" width="120" height="40" rx="5" class="box" />
+                <text x="410" y="405" class="text">Run Update</text>
+                
+                <!-- Success? -->
+                <polygon points="350,450 450,450 400,490" class="decision" />
+                <text x="400" y="475" class="text">Success?</text>
+                
+                <!-- Arrows -->
+                <path d="M 400 60 L 400 90" class="arrow" />
+                <path d="M 350 110 L 260 110 L 260 150" class="arrow" />
+                <text x="290" y="105" class="small-text">No</text>
+                
+                <path d="M 450 110 L 500 110 L 500 170" class="arrow" />
+                <text x="490" y="105" class="small-text">Yes</text>
+                
+                <path d="M 260 190 L 260 230 L 350 230" class="arrow" />
+                
+                <path d="M 350 190 L 300 190 L 300 250" class="arrow" />
+                <text x="310" y="220" class="small-text">No</text>
+                
+                <path d="M 450 190 L 560 190 L 560 150" class="arrow" />
+                <text x="520" y="185" class="small-text">Yes</text>
+                
+                <path d="M 560 190 L 560 230 L 450 230" class="arrow" />
+                
+                <path d="M 350 270 L 260 270 L 260 310" class="arrow" />
+                <text x="290" y="265" class="small-text">No</text>
+                
+                <path d="M 450 270 L 500 270 L 500 330 L 470 330" class="arrow" />
+                <text x="490" y="265" class="small-text">Yes</text>
+                
+                <path d="M 260 350 L 260 370 L 350 370" class="arrow" />
+                
+                <path d="M 410 350 L 410 380" class="arrow" />
+                
+                <path d="M 410 420 L 410 450" class="arrow" />
+                
+                <path d="M 350 470 L 300 470 L 300 405 L 350 405" class="arrow" />
+                <text x="310" y="450" class="small-text">No</text>
+                
+                <path d="M 450 470 L 500 470 L 500 405 L 470 405" class="arrow" />
+                <text x="490" y="450" class="small-text">Yes</text>
+            </svg>
+            <p><em>The script's logical flow ensures all dependencies are properly installed and configured before attempting the firmware update.</em></p>
+        </div>
+
+        <h3>Key Components</h3>
+        <div class="highlight">
+            <h4>Dependency Management</h4>
+            <pre><code># Check if Homebrew is installed, install if not
+if ! command_exists brew; then
+    echo "Homebrew not found. Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || error_exit "Failed to install Homebrew"
+    
+    # Add Homebrew to PATH for the current session if it was just installed
+    eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null || eval "$(/usr/local/bin/brew shellenv)" 2>/dev/null
+fi</code></pre>
+        </div>
+
+        <div class="highlight">
+            <h4>Wine Configuration for USB Access</h4>
+            <pre><code># Install necessary Windows components for USB access
+if command_exists winetricks; then
+    echo "Installing necessary Windows components for USB device access..."
+    echo "This may take a few minutes..."
+    
+    # Create a new Wine prefix specifically for the firmware update
+    export WINEPREFIX="$HOME/.wine-cherry-firmware"
+    
+    # Install Windows components
+    winetricks -q dotnet40 || echo "Warning: Failed to install .NET Framework 4.0"
+    winetricks -q win7 || echo "Warning: Failed to set Windows version to Windows 7"
+    
+    # Reset to default Wine prefix
+    unset WINEPREFIX
+fi</code></pre>
+        </div>
+
+        <div class="highlight">
+            <h4>Keyboard Detection</h4>
+            <pre><code># Function to check if the Cherry keyboard is connected
+check_keyboard_connected() {
+    echo "Checking for Cherry KC 1000 SC keyboard..."
+    
+    # Try to detect the keyboard using system_profiler
+    if system_profiler SPUSBDataType 2>/dev/null | grep -i "Cherry" >/dev/null; then
+        echo "Cherry keyboard detected!"
+        return 0
+    else
+        echo "Warning: Cherry keyboard not detected."
+        echo "Please make sure your keyboard is properly connected."
+        # Additional code omitted for brevity
+    fi
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Wine vs. Virtual Machine Approach</h2>
+        
+        <div class="diagram">
+            <h3>Wine Architecture</h3>
+            <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+                <!-- Wine Architecture Diagram -->
+                <style>
+                    .layer { stroke: #333; stroke-width: 2; }
+                    .macos { fill: #e8e8e8; }
+                    .wine { fill: #f0d7d7; }
+                    .windows { fill: #d7e8f0; }
+                    .app { fill: #fff; stroke: #333; stroke-width: 1; }
+                    .arrow { stroke: #666; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+                    .text { font-family: Arial; font-size: 14px; fill: #333; text-anchor: middle; }
+                    .small-text { font-family: Arial; font-size: 12px; fill: #666; }
+                    .label { font-family: Arial; font-size: 16px; font-weight: bold; fill: #333; }
+                </style>
+                
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+                    </marker>
+                </defs>
+                
+                <!-- macOS Layer -->
+                <rect x="50" y="300" width="700" height="80" rx="5" class="layer macos" />
+                <text x="400" y="365" class="label">macOS</text>
+                
+                <!-- Wine Layer -->
+                <rect x="50" y="150" width="700" height="130" rx="5" class="layer wine" />
+                <text x="400" y="265" class="label">Wine</text>
+                
+                <!-- Windows API Layer -->
+                <rect x="50" y="20" width="700" height="110" rx="5" class="layer windows" />
+                <text x="400" y="115" class="label">Windows API</text>
+                
+                <!-- Wine Components -->
+                <rect x="100" y="180" width="120" height="40" rx="5" class="app" />
+                <text x="160" y="205" class="text">Wine Loader</text>
+                
+                <rect x="250" y="180" width="120" height="40" rx="5" class="app" />
+                <text x="310" y="205" class="text">Wine Server</text>
+                
+                <rect x="400" y="180" width="120" height="40" rx="5" class="app" />
+                <text x="460" y="205" class="text">DLL Translations</text>
+                
+                <rect x="550" y="180" width="120" height="40" rx="5" class="app" />
+                <text x="610" y="205" class="text">Wine Prefix</text>
+                
+                <!-- Windows Components -->
+                <rect x="150" y="50" width="120" height="40" rx="5" class="app" />
+                <text x="210" y="75" class="text">Windows EXE</text>
+                
+                <rect x="350" y="50" width="120" height="40" rx="5" class="app" />
+                <text x="410" y="75" class="text">Windows DLLs</text>
+                
+                <rect x="550" y="50" width="120" height="40" rx="5" class="app" />
+                <text x="610" y="75" class="text">Windows Registry</text>
+                
+                <!-- macOS Components -->
+                <rect x="150" y="320" width="120" height="40" rx="5" class="app" />
+                <text x="210" y="345" class="text">XQuartz (X11)</text>
+                
+                <rect x="350" y="320" width="120" height="40" rx="5" class="app" />
+                <text x="410" y="345" class="text">macOS Drivers</text>
+                
+                <rect x="550" y="320" width="120" height="40" rx="5" class="app" />
+                <text x="610" y="345" class="text">USB Devices</text>
+                
+                <!-- Arrows -->
+                <path d="M 210 90 L 210 180" class="arrow" />
+                <path d="M 410 90 L 410 180" class="arrow" />
+                <path d="M 610 90 L 610 180" class="arrow" />
+                
+                <path d="M 160 220 L 160 320" class="arrow" />
+                <path d="M 310 220 L 310 320" class="arrow" />
+                <path d="M 460 220 L 460 320" class="arrow" />
+                <path d="M 610 220 L 610 320" class="arrow" />
+                
+                <!-- Labels -->
+                <text x="70" y="40" class="small-text">Windows Application Layer</text>
+                <text x="70" y="170" class="small-text">Wine Compatibility Layer</text>
+                <text x="70" y="320" class="small-text">macOS Native Layer</text>
+            </svg>
+            <p><em>Wine provides a compatibility layer that translates Windows API calls to POSIX calls on-the-fly, allowing Windows applications to run on macOS.</em></p>
+        </div>
+
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Wine Approach</th>
+                <th>Virtual Machine Approach</th>
+            </tr>
+            <tr>
+                <td>Disk Space Required</td>
+                <td>~1GB</td>
+                <td>20GB+</td>
+            </tr>
+            <tr>
+                <td>Memory Usage</td>
+                <td>Minimal (shared with host)</td>
+                <td>2-4GB dedicated</td>
+            </tr>
+            <tr>
+                <td>Setup Time</td>
+                <td>Minutes</td>
+                <td>Hours</td>
+            </tr>
+            <tr>
+                <td>Windows License</td>
+                <td>Not required</td>
+                <td>Required</td>
+            </tr>
+            <tr>
+                <td>User Experience</td>
+                <td>Single script execution</td>
+                <td>Multiple steps, VM management</td>
+            </tr>
+            <tr>
+                <td>Maintenance</td>
+                <td>Minimal</td>
+                <td>Regular Windows updates</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Cherry KC 1000 SC Keyboard</h2>
+        
+        <div class="diagram">
+            <h3>Keyboard Features</h3>
+            <svg width="800" height="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+                <!-- Cherry KC 1000 SC Keyboard Diagram -->
+                <style>
+                    .keyboard { fill: #333; stroke: #000; stroke-width: 2; }
+                    .keys { fill: #f0f0f0; stroke: #999; stroke-width: 1; }
+                    .function-keys { fill: #e0e0e0; stroke: #999; stroke-width: 1; }
+                    .special-keys { fill: #d7d7d7; stroke: #999; stroke-width: 1; }
+                    .numpad { fill: #e8e8e8; stroke: #999; stroke-width: 1; }
+                    .card-reader { fill: #c62828; stroke: #000; stroke-width: 1; }
+                    .text { font-family: Arial; font-size: 10px; fill: #333; text-anchor: middle; dominant-baseline: middle; }
+                    .label { font-family: Arial; font-size: 14px; fill: #333; }
+                    .feature-line { stroke: #c62828; stroke-width: 1.5; fill: none; }
+                    .feature-text { font-family: Arial; font-size: 12px; fill: #c62828; }
+                </style>
+                
+                <!-- Keyboard Base -->
+                <rect x="50" y="70" width="700" height="200" rx="10" class="keyboard" />
+                
+                <!-- Main Keys Area -->
+                <rect x="80" y="100" width="460" height="140" rx="5" class="keys" />
+                
+                <!-- Function Keys Row -->
+                <rect x="80" y="80" width="460" height="20" rx="3" class="function-keys" />
+                
+                <!-- Numpad -->
+                <rect x="560" y="100" width="160" height="140" rx="5" class="numpad" />
+                
+                <!-- Smart Card Reader -->
+                <rect x="560" y="80" width="160" height="20" rx="3" class="card-reader" />
+                <text x="640" y="90" class="text" style="fill: white;">SMART CARD READER</text>
+                
+                <!-- Key Rows (simplified) -->
+                <g class="key-rows">
+                    <!-- Function keys -->
+                    <rect x="80" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="110" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="140" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="170" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="200" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="230" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="260" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="290" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="320" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="350" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="380" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="410" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="440" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="470" y="80" width="30" height="20" class="function-keys" />
+                    <rect x="500" y="80" width="40" height="20" class="function-keys" />
+                    
+                    <!-- Row 1 -->
+                    <rect x="80" y="100" width="30" height="30" class="keys" />
+                    <rect x="110" y="100" width="30" height="30" class="keys" />
+                    <rect x="140" y="100" width="30" height="30" class="keys" />
+                    <rect x="170" y="100" width="30" height="30" class="keys" />
+                    <rect x="200" y="100" width="30" height="30" class="keys" />
+                    <rect x="230" y="100" width="30" height="30" class="keys" />
+                    <rect x="260" y="100" width="30" height="30" class="keys" />
+                    <rect x="290" y="100" width="30" height="30" class="keys" />
+                    <rect x="320" y="100" width="30" height="30" class="keys" />
+                    <rect x="350" y="100" width="30" height="30" class="keys" />
+                    <rect x="380" y="100" width="30" height="30" class="keys" />
+                    <rect x="410" y="100" width="30" height="30" class="keys" />
+                    <rect x="440" y="100" width="30" height="30" class="keys" />
+                    <rect x="470" y="100" width="70" height="30" class="special-keys" />
+                    
+                    <!-- Row 2 -->
+                    <rect x="80" y="130" width="45" height="30" class="special-keys" />
+                    <rect x="125" y="130" width="30" height="30" class="keys" />
+                    <rect x="155" y="130" width="30" height="30" class="keys" />
+                    <rect x="185" y="130" width="30" height="30" class="keys" />
+                    <rect x="215" y="130" width="30" height="30" class="keys" />
+                    <rect x="245" y="130" width="30" height="30" class="keys" />
+                    <rect x="275" y="130" width="30" height="30" class="keys" />
+                    <rect x="305" y="130" width="30" height="30" class="keys" />
+                    <rect x="335" y="130" width="30" height="30" class="keys" />
+                    <rect x="365" y="130" width="30" height="30" class="keys" />
+                    <rect x="395" y="130" width="30" height="30" class="keys" />
+                    <rect x="425" y="130" width="30" height="30" class="keys" />
+                    <rect x="455" y="130" width="30" height="30" class="keys" />
+                    <rect x="485" y="130" width="55" height="30" class="special-keys" />
+                    
+                    <!-- Row 3 -->
+                    <rect x="80" y="160" width="55" height="30" class="special-keys" />
+                    <rect x="135" y="160" width="30" height="30" class="keys" />
+                    <rect x="165" y="160" width="30" height="30" class="keys" />
+                    <rect x="195" y="160" width="30" height="30" class="keys" />
+                    <rect x="225" y="160" width="30" height="30" class="keys" />
+                    <rect x="255" y="160" width="30" height="30" class="keys" />
+                    <rect x="285" y="160" width="30" height="30" class="keys" />
+                    <rect x="315" y="160" width="30" height="30" class="keys" />
+                    <rect x="345" y="160" width="30" height="30" class="keys" />
+                    <rect x="375" y="160" width="30" height="30" class="keys" />
+                    <rect x="405" y="160" width="30" height="30" class="keys" />
+                    <rect x="435" y="160" width="30" height="30" class="keys" />
+                    <rect x="465" y="160" width="75" height="30" class="special-keys" />
+                    
+                    <!-- Row 4 -->
+                    <rect x="80" y="190" width="65" height="30" class="special-keys" />
+                    <rect x="145" y="190" width="30" height="30" class="keys" />
+                    <rect x="175" y="190" width="30" height="30" class="keys" />
+                    <rect x="205" y="190" width="30" height="30" class="keys" />
+                    <rect x="235" y="190" width="30" height="30" class="keys" />
+                    <rect x="265" y="190" width="30" height="30" class="keys" />
+                    <rect x="295" y="190" width="30" height="30" class="keys" />
+                    <rect x="325" y="190" width="30" height="30" class="keys" />
+                    <rect x="355" y="190" width="30" height="30" class="keys" />
+                    <rect x="385" y="190" width="30" height="30" class="keys" />
+                    <rect x="415" y="190" width="30" height="30" class="keys" />
+                    <rect x="445" y="190" width="95" height="30" class="special-keys" />
+                    
+                    <!-- Row 5 (Space bar) -->
+                    <rect x="80" y="220" width="60" height="20" class="special-keys" />
+                    <rect x="140" y="220" width="60" height="20" class="special-keys" />
+                    <rect x="200" y="220" width="180" height="20" class="keys" />
+                    <rect x="380" y="220" width="60" height="20" class="special-keys" />
+                    <rect x="440" y="220" width="100" height="20" class="special-keys" />
+                    
+                    <!-- Numpad -->
+                    <rect x="560" y="100" width="40" height="30" class="numpad" />
+                    <rect x="600" y="100" width="40" height="30" class="numpad" />
+                    <rect x="640" y="100" width="40" height="30" class="numpad" />
+                    <rect x="680" y="100" width="40" height="30" class="numpad" />
+                    
+                    <rect x="560" y="130" width="40" height="30" class="numpad" />
+                    <rect x="600" y="130" width="40" height="30" class="numpad" />
+                    <rect x="640" y="130" width="40" height="30" class="numpad" />
+                    <rect x="680" y="130" width="40" height="60" class="numpad" />
+                    
+                    <rect x="560" y="160" width="40" height="30" class="numpad" />
+                    <rect x="600" y="160" width="40" height="30" class="numpad" />
+                    <rect x="640" y="160" width="40" height="30" class="numpad" />
+                    
+                    <rect x="560" y="190" width="40" height="30" class="numpad" />
+                    <rect x="600" y="190" width="40" height="30" class="numpad" />
+                    <rect x="640" y="190" width="40" height="30" class="numpad" />
+                    <rect x="680" y="190" width="40" height="50" class="numpad" />
+                    
+                    <rect x="560" y="220" width="80" height="20" class="numpad" />
+                    <rect x="640" y="220" width="40" height="20" class="numpad" />
+                </g>
+                
+                <!-- Feature Callouts -->
+                <line x1="640" y1="80" x2="700" y2="40" class="feature-line" />
+                <text x="710" y="35" class="feature-text">Smart Card Reader</text>
+                
+                <line x1="290" y1="150" x2="200" y2="40" class="feature-line" />
+                <text x="200" y="30" class="feature-text">Cherry Key Switches</text>
+                
+                <line x1="620" y1="160" x2="700" y2="200" class="feature-line" />
+                <text x="710" y="210" class="feature-text">Full Numpad</text>
+                
+                <!-- USB Connection -->
+                <rect x="390" y="270" width="20" height="10" class="keyboard" />
+                <line x1="400" y1="270" x2="400" y2="250" class="feature-line" />
+                <text x="400" y="285" class="feature-text">USB Connection</text>
+                
+                <!-- Keyboard Label -->
+                <text x="400" y="50" class="label" style="font-size: 18px; font-weight: bold;">Cherry KC 1000 SC Keyboard</text>
+            </svg>
+            <p><em>The Cherry KC 1000 SC combines professional typing comfort with integrated smart card reader functionality.</em></p>
+        </div>
+
+        <h3>Key Specifications</h3>
+        <ul>
+            <li>Integrated smart card reader</li>
+            <li>Full-size keyboard with number pad</li>
+            <li>Durable Cherry key switches</li>
+            <li>Compatible with Windows and macOS (with firmware update)</li>
+            <li>USB connection</li>
+        </ul>
+
+        <h3>Common Issues on macOS</h3>
+        <p>Before the firmware update, users experienced:</p>
+        <ul>
+            <li>Ignored keystrokes</li>
+            <li>Repeated keystrokes</li>
+            <li>Inconsistent key response</li>
+        </ul>
+        <p>The firmware update provided by Cherry resolves these issues, but requires Windows to apply - until now, thanks to this innovative Wine-based solution!</p>
+    </div>
+
+    <div class="footer">
+        <p>Cherry KC 1000 SC Firmware Update Tool for macOS</p>
+        <p>© 2025 Florian Bidabe</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+boot4_upload.exe -r "Cherry KC 1000 SC 0" CHKBD-1.2.1.44-20250324T205718-1DF21CCF5F7E-RELEASE.sfu
+
+pause
