@@ -1,0 +1,145 @@
+# macOS specific exclusions
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+# Thumbnails
+._*
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# macOS native encryption file
+._.DS_Store
+._.localized
+
+# Temporary files created by applications
+.TemporaryItems
+.fseventsd
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories created by macOS
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# macOS generated files
+._*
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+
+# Node modules if you're working with Node.js
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS Finder Thumbnails
+._*
+
+# macOS Quick Look
+.AppleDouble
+
+# macOS Cloud Storage
+.icon\r
+.DocumentRevisions-V100
+.TemporaryItems
+.Trashes
+.fseventsd
+
+# macOS Trash
+.Trashes
+
+# VS Code exclusions
+.vscode/
+.history/
+
+# Xcode
+build/
+DerivedData/
+.idea/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+Carthage/Packages.resolved
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Provisioning Profiles
+*.mobileprovision
+*.provisionprofile
+
+# Xcode Patch files
+*.xcodeproj/*
+*.xcworkspace/*
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# App file
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Workspace data
+*.xcuserdatad
+project.xcworkspace
+
+# Scheme schemes
+*.xcscheme
+*.xccheckout
+
+# General project exclusions
+.DS_Store
+.DS_Store?
+**/.gradle/
+.gradle/
+.groupwise/
+.idea/
+build/
+icon?
+yarn.lock
+**/.metadata
+.metadata
+node_modules/
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# SBT
+target/
+lib_managed/
+src_managed/
+project/target/
+project/project/
+logs/
+
+# Linux
+*~ 
+.swp
+

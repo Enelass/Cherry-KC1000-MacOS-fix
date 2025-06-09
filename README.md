@@ -1,36 +1,52 @@
-# Cherry KC 1000 SC Firmware Update Tool for macOS
+# Cherry KC 1000 SC Firmware Update Tool for macOS (Work in Progress)
 
 ![Cherry KC 1000 SC Keyboard](https://img.shields.io/badge/Cherry-KC%201000%20SC-red)
 ![macOS](https://img.shields.io/badge/macOS-Sonoma%20%26%20later-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.0.5-blue)
+![Version](https://img.shields.io/badge/Version-0.1.0-blue)
+![Status](https://img.shields.io/badge/Status-Not%20Functional-red)
 
-A shell script solution to update the firmware of Cherry KC 1000 SC keyboards on macOS using Wine, eliminating the need for a Windows virtual machine.
+**IMPORTANT NOTICE: This project is currently a work in progress and is NOT YET FUNCTIONAL. It represents an experimental approach that has not been proven to work.**
+
+A potential shell script solution to update the firmware of Cherry KC 1000 SC keyboards on macOS using Wine. There are significant concerns about Wine's ability to properly interact with USB ports and drivers, which may ultimately make this approach unfeasible.
 
 ## The Problem
 
 Cherry KC 1000 SC keyboards are experiencing issues on macOS where keystrokes are either ignored or repeated. Cherry provides a firmware update that fixes these issues, but it's only available as a Windows executable.
 
-## The Solution
+## The Proposed Solution (Experimental)
 
-This project provides a shell script that:
+This project aims to develop a shell script that would:
 
-1. Automatically installs all required dependencies (Homebrew, Wine, XQuartz, winetricks)
-2. Configures Wine with the necessary components for USB device access
-3. Detects if the Cherry keyboard is connected
-4. Runs the firmware update tool through Wine
-5. Provides detailed error handling and troubleshooting information
+1. Install required dependencies (Homebrew, Wine, XQuartz, winetricks)
+2. Configure Wine with components for USB device access
+3. Detect if the Cherry keyboard is connected
+4. Run the firmware update tool through Wine
 
-## Why Wine Instead of a VM?
+**DISCLAIMER: It is currently unknown if Wine can properly handle the USB device interactions required for firmware updates. This approach may not work at all.**
 
-While a Windows virtual machine would work for updating the firmware, the Wine approach has several advantages:
+## Alternative Approaches
+
+Given the uncertainty around Wine's USB capabilities, consider these alternatives:
+
+- **Windows Virtualization**: Using a full Windows VM through:
+  - VirtualBox/VMware (most reliable but requires Windows license)
+  - QEMU (open-source virtualization)
+  - Docker Windows containers (more lightweight but still experimental)
+
+- **Bootcamp**: Dual-boot into Windows for the firmware update
+- **Borrowing a Windows PC**: One-time use of a Windows computer may be the simplest solution
+
+## Why Consider Wine Instead of a VM?
+
+If Wine could successfully handle the USB interactions (which is unproven), it would offer:
 
 - **Smaller footprint**: ~1GB vs 20GB+ for a Windows VM
 - **Faster setup**: Minutes vs hours for a full VM
 - **No Windows license required**: Saving cost and complexity
 - **Simpler for end users**: Single script vs VM setup and configuration
 
-## Installation and Usage
+## Installation and Usage (Not Yet Functional)
 
 1. Clone this repository:
    ```bash
@@ -67,7 +83,7 @@ While a Windows virtual machine would work for updating the firmware, the Wine a
    ./update_cherry_firmware.sh --uninstall
    ```
 
-## Script Workflow
+## Script Workflow (Proposed)
 
 ```mermaid
 flowchart TD
