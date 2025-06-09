@@ -1,0 +1,56 @@
+2025-06-09 14:29:23 [INFO] Starting Cherry KC 1000 SC Firmware Update Tool (QEMU Version)
+2025-06-09 14:29:23 [INFO] Checking for Homebrew...
+2025-06-09 14:29:23 [SUCCESS] Homebrew is installed.
+2025-06-09 14:29:23 [INFO] Checking for QEMU...
+2025-06-09 14:29:23 [SUCCESS] QEMU is installed.
+2025-06-09 14:29:23 [INFO] Downloading VirtIO drivers...
+2025-06-09 14:31:43 [ERROR] Failed to download VirtIO drivers.
+2025-06-09 14:31:43 [ERROR] Failed to download VirtIO drivers.
+2025-06-09 14:34:34 [INFO] Starting Cherry KC 1000 SC Firmware Update Tool (QEMU Version)
+2025-06-09 14:34:34 [INFO] Checking for Homebrew...
+2025-06-09 14:34:34 [SUCCESS] Homebrew is installed.
+2025-06-09 14:34:34 [INFO] Checking for QEMU...
+2025-06-09 14:34:34 [SUCCESS] QEMU is installed.
+2025-06-09 14:34:34 [INFO] Downloading VirtIO drivers...
+2025-06-09 14:36:53 [ERROR] Failed to download VirtIO drivers.
+2025-06-09 14:36:53 [WARNING] Failed to download VirtIO drivers.
+2025-06-09 14:36:53 [WARNING] You can manually download VirtIO drivers from: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+2025-06-09 14:36:53 [WARNING] Save the downloaded file to: /Users/bidabefl/.cherry-qemu/virtio-win.iso
+2025-06-09 14:36:53 [INFO] Continuing without VirtIO drivers...
+2025-06-09 14:36:53 [INFO] Creating Windows VM image...
+2025-06-09 14:36:53 [SUCCESS] Windows VM image created successfully.
+2025-06-09 14:36:53 [INFO] Preparing firmware files for VM access...
+2025-06-09 14:36:53 [SUCCESS] Firmware files prepared successfully.
+2025-06-09 14:36:53 [INFO] Detecting Cherry KC 1000 SC keyboard...
+2025-06-09 14:36:53 [WARNING] Cherry KC 1000 SC keyboard not detected.
+2025-06-09 14:36:53 [WARNING] Cherry KC 1000 SC keyboard not detected.
+2025-06-09 14:56:24 [INFO] Starting Windows VM. Please follow these steps in the VM:
+2025-06-09 14:56:24 [INFO] 1. Install Windows (select 'I don't have a product key' if asked)
+2025-06-09 14:56:24 [INFO] 2. When prompted for drivers during installation, browse to the VirtIO CD
+2025-06-09 14:56:24 [INFO] 3. After Windows is installed, access the shared folder at Z:\
+2025-06-09 14:56:24 [INFO] 4. Install the Cherry keyboard driver from the shared folder
+2025-06-09 14:56:24 [INFO] 5. Run the firmware update tool from the shared folder
+2025-06-09 14:56:24 [INFO] 6. Shut down Windows when the update is complete
+2025-06-09 14:56:24 [INFO] Starting Windows VM with USB passthrough...
+2025-06-09 14:56:24 [INFO] Using USB device: : (vendorid=0x, productid=0x)
+2025-06-09 14:56:24 [WARNING] On macOS, USB passthrough may require administrator privileges.
+2025-06-09 14:56:27 [INFO] Using sudo for QEMU.
+2025-06-09 14:56:30 [ERROR] Windows VM exited with code 1.
+2025-06-09 14:56:30 [INFO] If you encountered USB access issues, try running the script with sudo.
+2025-06-09 14:56:30 [ERROR] Failed to run Windows VM.
+2025-06-09 14:59:21 [INFO] Starting Cherry KC 1000 SC Firmware Update Tool (QEMU Version)
+2025-06-09 14:59:21 [INFO] Checking for Homebrew...
+2025-06-09 14:59:21 [SUCCESS] Homebrew is installed.
+2025-06-09 14:59:21 [INFO] Checking for QEMU...
+2025-06-09 14:59:21 [SUCCESS] QEMU is installed.
+2025-06-09 14:59:21 [INFO] Downloading VirtIO drivers...
+2025-06-09 15:01:39 [ERROR] Failed to download VirtIO drivers.
+2025-06-09 15:01:39 [WARNING] Failed to download VirtIO drivers.
+2025-06-09 15:01:39 [WARNING] You can manually download VirtIO drivers from: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+2025-06-09 15:01:39 [WARNING] Save the downloaded file to: /Users/bidabefl/.cherry-qemu/virtio-win.iso
+2025-06-09 15:01:39 [INFO] Continuing without VirtIO drivers...
+2025-06-09 15:01:39 [INFO] Preparing firmware files for VM access...
+2025-06-09 15:01:39 [SUCCESS] Firmware files prepared successfully.
+2025-06-09 15:01:39 [INFO] Detecting Cherry KC 1000 SC keyboard...
+2025-06-09 15:01:39 [WARNING] Cherry KC 1000 SC keyboard not detected.
+2025-06-09 15:01:39 [WARNING] Cherry KC 1000 SC keyboard not detected.
