@@ -1,16 +1,18 @@
-# Cherry KC 1000 SC Firmware Update using QEMU (Tested)
+# Cherry KC 1000 SC Firmware Update using QEMU (Work in Progress)
+
+**IMPORTANT: This solution is still a work in progress and is NOT YET FUNCTIONAL.**
 
 This folder contains scripts and instructions for updating the Cherry KC 1000 SC keyboard firmware using QEMU virtualization on macOS.
 
-## Testing Results
+## Current Status
 
-We've tested the QEMU-based approach and confirmed:
+The QEMU-based approach is still under development:
 
 1. ✅ QEMU can be successfully installed on macOS using Homebrew
 2. ✅ The Cherry KC 1000 SC keyboard can be detected with Vendor ID: 046a, Product ID: 00a1
-3. ✅ QEMU can be configured for USB passthrough with the detected keyboard
-4. ⚠️ USB passthrough requires special permissions on macOS (may need to run with sudo)
-5. ⚠️ You need to set `export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES` to avoid Objective-C runtime issues
+3. ⚠️ QEMU configuration for USB passthrough is implemented but not fully working
+4. ❌ VM creation and Windows installation process needs further refinement
+5. ❌ Firmware update process has not been successfully completed
 
 ## Why QEMU?
 
